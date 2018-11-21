@@ -45,7 +45,7 @@
 
 给控件加事件，1： 控件["command"]=函数名 
 
-​			   2：控件.bind("事件名"，函数名) 
+			   2：控件.bind("事件名"，函数名) 
 
 布局管理器：控件.pack（）这样控件才能显示
 
@@ -71,7 +71,7 @@ urllib2.request()  与urllib2.urlopen()
 
 读取网络文件  引入 urllib.request   ，使用urlopen()
 
-​     import urllib.request  
+     import urllib.request  
 
 urllib.request.urlopen()
 
@@ -114,3 +114,157 @@ flags 编译标志位，用于修改正则表达式的匹配方式，如：是�
 
 ```
 
+
+
+str.format() 的基本使用如下:
+
+```python
+>>> print('{}网址： "{}!"'.format('菜鸟教程', 'www.runoob.com'))
+菜鸟教程网址： "www.runoob.com!"
+```
+
+括号及其里面的字符 (称作格式化字段) 将会被 format() 中的参数替换。
+
+
+
+在括号中的数字用于指向传入对象在 format() 中的位置，如下所示：
+
+```python
+>>> print('{0} 和 {1}'.format('Google', 'Runoob'))
+Google 和 Runoob
+>>> print('{1} 和 {0}'.format('Google', 'Runoob'))
+Runoob 和 Google
+```
+
+
+
+如果在 format() 中使用了关键字参数, 那么它们的值会指向使用该名字的参数。
+
+```python
+>>> print('{name}网址： {site}'.format(name='菜鸟教程', site='www.runoob.com'))
+菜鸟教程网址： www.runoob.com
+```
+
+
+
+位置及关键字参数可以任意的结合:
+
+```python
+>>> print('站点列表 {0}, {1}, 和 {other}。'.format('Google', 'Runoob',
+                                                       other='Taobao'))
+站点列表 Google, Runoob, 和 Taobao。
+```
+
+'!a' (使用 ascii()), '!s' (使用 str()) 和 '!r' (使用 repr()) 可以用于在格式化某个值之前对其进行转化:
+
+```python
+>>> import math
+>>> print('常量 PI 的值近似为： {}。'.format(math.pi))
+常量 PI 的值近似为： 3.141592653589793。
+>>> print('常量 PI 的值近似为： {!r}。'.format(math.pi))
+常量 PI 的值近似为： 3.141592653589793。
+```
+
+
+
+
+
+
+
+
+
+| r    | 以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。 |
+| ---- | ------------------------------------------------------------ |
+| rb   | 以二进制格式打开一个文件用于只读。文件指针将会放在文件的开头。 |
+| r+   | 打开一个文件用于读写。文件指针将会放在文件的开头。           |
+| rb+  | 以二进制格式打开一个文件用于读写。文件指针将会放在文件的开头。 |
+| w    | 打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。 |
+| wb   | 以二进制格式打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。 |
+| w+   | 打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。 |
+| wb+  | 以二进制格式打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。 |
+| a    | 打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。 |
+| ab   | 以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。 |
+| a+   | 打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。 |
+| ab+  | 以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。如果该文件不存在，创建新文件用于读写。 |
+
+![img](http://www.runoob.com/wp-content/uploads/2013/11/2112205-861c05b2bdbc9c28.png)
+
+| 模式       | r    | r+   | w    | w+   | a    | a+   |
+| ---------- | ---- | ---- | ---- | ---- | ---- | ---- |
+| 读         | +    | +    |      | +    |      | +    |
+| 写         |      | +    | +    | +    | +    | +    |
+| 创建       |      |      | +    | +    | +    | +    |
+| 覆盖       |      |      | +    | +    |      |      |
+| 指针在开始 | +    | +    | +    | +    |      |      |
+| 指针在结尾 |      |      |      |      | +    | +    |
+
+
+
+
+
+## pickle 模块
+
+python的pickle模块实现了基本的数据序列和反序列化。
+
+通过pickle模块的序列化操作我们能够将程序中运行的对象信息保存到文件中去，永久存储。
+
+通过pickle模块的反序列化操作，我们能够从文件中创建上一次程序保存的对象。
+
+基本接口：
+
+```python
+pickle.dump(obj, file, [,protocol])
+```
+
+有了 pickle 这个对象, 就能对 file 以读取的形式打开:
+
+```python
+x = pickle.load(file)
+```
+
+**注解：**从 file 中读取一个字符串，并将它重构为原来的python对象。
+
+**file:** 类文件对象，有read()和readline()接口。
+
+实例1：
+
+```python
+#!/usr/bin/python3
+import pickle
+
+# 使用pickle模块将数据对象保存到文件
+data1 = {'a': [1, 2.0, 3, 4+6j],
+         'b': ('string', u'Unicode string'),
+         'c': None}
+
+selfref_list = [1, 2, 3]
+selfref_list.append(selfref_list)
+
+output = open('data.pkl', 'wb')
+
+# Pickle dictionary using protocol 0.
+pickle.dump(data1, output)
+
+# Pickle the list using the highest protocol available.
+pickle.dump(selfref_list, output, -1)
+
+output.close()
+```
+
+实例2：
+
+```python
+#!/usr/bin/python3
+import pprint, pickle
+
+#使用pickle模块从文件中重构python对象
+pkl_file = open('data.pkl', 'rb')
+
+data1 = pickle.load(pkl_file)
+pprint.pprint(data1)
+
+data2 = pickle.load(pkl_file)
+pprint.pprint(data2)
+
+pkl_file.close()
+```
