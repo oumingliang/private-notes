@@ -36,3 +36,81 @@
 | [ord(x)](http://www.runoob.com/python3/python-func-ord.html) | 将一个字符转换为它的整数值                          |
 | [hex(x)](http://www.runoob.com/python3/python-func-hex.html) | 将一个整数转换为一个十六进制字符串                  |
 | [oct(x)](http://www.runoob.com/python3/python-func-oct.html) | 将一个整数转换为一个八进制字符串                    |
+
+
+
+## 2. GUI
+
+引入Tkinter 工具库，
+
+给控件加事件，1： 控件["command"]=函数名 
+
+​			   2：控件.bind("事件名"，函数名) 
+
+布局管理器：控件.pack（）这样控件才能显示
+
+
+
+## 3. 网络编程
+
+网络编程里的一个基础组件:套接字(socket) ，提供了两个方法（send，recv） 用来发送与接收，socket.gethostname ：获取当前主机名
+
+模块：urllib1与urllib2
+
+urllib2.request()  与urllib2.urlopen()
+
+
+
+获取远程文件：urlretrieve(“url”,"副本文件地址") 获取网页内容，存在副本文件中
+
+
+
+## 4. 面向web
+
+读取本地文件用 open()
+
+读取网络文件  引入 urllib.request   ，使用urlopen()
+
+​     import urllib.request  
+
+urllib.request.urlopen()
+
+获取到文件或者网页之后，读取内容用 read()，解码用decode（），常用于中文解码
+
+从英文意思上看，encode和decode分别指编码和解码。在python中，Unicode类型是作为编码的基础类型，即：
+
+            decode                 encode
+      str ---------> str(Unicode) ---------> str
+
+
+### 4.1 re模块中常用功能函数
+
+**正则模块 re**
+
+**1、compile()**
+
+编译正则表达式模式，返回一个对象的模式。（可以把那些常用的正则表达式编译成正则表达式对象，这样可以提高一点效率。）
+
+格式：
+
+re.compile(pattern,flags=0)
+
+pattern: 编译时用的表达式字符串。
+
+flags 编译标志位，用于修改正则表达式的匹配方式，如：是否区分大小写，多行匹配等。常用的flags有：
+
+| 标志               | 含义                                                     |
+| ------------------ | -------------------------------------------------------- |
+| re.S(DOTALL)       | 使.匹配包括换行在内的所有字符                            |
+| re.I（IGNORECASE） | 使匹配对大小写不敏感                                     |
+| re.L（LOCALE）     | 做本地化识别（locale-aware)匹配，法语等                  |
+| re.M(MULTILINE)    | 多行匹配，影响^和$                                       |
+| re.X(VERBOSE)      | 该标志通过给予更灵活的格式以便将正则表达式写得更易于理解 |
+| re.U               | 根据Unicode字符集解析字符，这个标志影响\w,\W,\b,\B       |
+
+
+
+```python
+
+```
+
