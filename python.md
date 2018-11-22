@@ -486,3 +486,61 @@ pprint.pprint(data2)
 pkl_file.close()
 ```
 
+
+
+### 5. 程序打包
+
+安装 setuptools 模块，使用pip install
+
+导入 setup
+
+from setuptools import setup
+
+setup(
+
+name='hello',
+
+version='1.1',
+
+description='demo',
+
+py_modules=['hello'])
+
+将该程序存储为setup.py，且其所在目录下包含 hello.py
+
+创建exe文件，导入py2exe这个模块
+
+创建macos 文件，导入py2app模块
+
+
+
+### 6.  新闻汇总项目
+
+NNTP协议
+
+from nntplib import NNTP
+
+server= NNTP('URL')
+
+NNTP对象的方法(server)
+
+| 方法                         | 描述                                                         |
+| ---------------------------- | ------------------------------------------------------------ |
+| group(name)                  | 选择一个组的名字，返回一个元组（rsp，ct，fst，lst，group）：服务器的返回信息文章的数量、第一个和最后一个文章的号码以及组名，所有数据都是字符串（返回的group与我们传进去的那么应该是相同的） |
+| xhdr(hdr,artrg,     [ofile]) | 返回文章范围artrg（“头-尾”的格式）内文章hdr头的列表，或输出到文件ofile中 |
+| body(id[,ofile])             | 给定文章的id，id可以是消息的ID（放在尖括号里），或一个文章号（是一个字符串），返回一个元祖（rsp，anum，mid，data）：服务器的返回信息、文章号（是一个字符串）、消息的ID（放在尖括号里）和文章所有行的列表或把数据输出到文件ofile中 |
+| head(id)                     | 与body()相似，只是返回的元祖中那个行的列表中只包含了文章的标题 |
+| article(id)                  | 也跟body()一样，只是返回的元祖中哪个行的列表中包含了文章的标题和内容 |
+| stat(id)                     | 让文章的“指针”指向id（同上，是一个消息的ID或是文章的号码）。返回一个跟body一样的元祖（rsp，anum，mid），但不包含文章的数据 |
+| next()                       | 用法和stat()类似，把文章指针移到下一篇文章，返回与stat()相似的元祖 |
+| last()                       | 用法和stat()类似，把文章指针转移到最后一篇文章，返回与stat()相似的元祖 |
+| post(ufile)                  | 上传ufile文件对象里的内容（使用ufile.readlines()），并在当前新闻组发表 |
+| quit()                       | 关闭连接，然后退出。                                         |
+
+
+
+## 7. TensorFlow
+
+机器学习
+
+参考链接：https://baijiahao.baidu.com/s?id=1606694239390920783&wfr=spider&for=pc
