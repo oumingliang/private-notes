@@ -543,4 +543,8 @@ NNTP对象的方法(server)
 
 机器学习
 
-参考链接：https://baijiahao.baidu.com/s?id=1606694239390920783&wfr=spider&for=pc
+参考链接：
+
+https://baijiahao.baidu.com/s?id=1606694239390920783&wfr=spider&for=pc
+
+https://laboo.top/2018/11/21/tfjs-dr/
