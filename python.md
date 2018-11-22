@@ -1,3 +1,5 @@
+
+
 # python学习重点笔记
 
 ## 1. Python3 的六个标准数据类型：
@@ -87,7 +89,7 @@ urllib.request.urlopen()
 
 **正则模块 re**
 
-**1、compile()**
+#### **1、compile()**
 
 编译正则表达式模式，返回一个对象的模式。（可以把那些常用的正则表达式编译成正则表达式对象，这样可以提高一点效率。）
 
@@ -112,5 +114,375 @@ flags 编译标志位，用于修改正则表达式的匹配方式，如：是�
 
 ```python
 
+```
+
+
+
+#### **2、match()**
+
+决定RE是否在字符串刚开始的位置匹配。//注：这个方法并不是完全匹配。当pattern结束时若string还有剩余字符，仍然视为成功。想要完全匹配，可以在表达式末尾加上边界匹配符'$'
+
+格式：
+
+re.match(pattern, string, flags=0)
+
+```python
+print(re.match('com','comwww.runcomoob').group())
+print(re.match('com','Comwww.runcomoob',re.I).group())
+执行结果如下：
+com
+com
+```
+
+
+
+#### **3、search()**
+
+ 格式：
+
+re.search(pattern, string, flags=0)
+
+re.search函数会在字符串内查找模式匹配,只要找到第一个匹配然后返回，如果字符串没有匹配，则返回None。
+
+```
+print(re.search('\dcom','www.4comrunoob.5com').group())
+执行结果如下：
+4com
+```
+
+*注：match和search一旦匹配成功，就是一个match object对象，而match object对象有以下方法：
+
+- group() 返回被 RE 匹配的字符串
+- start() 返回匹配开始的位置
+- end() 返回匹配结束的位置
+- span() 返回一个元组包含匹配 (开始,结束) 的位置
+- group() 返回re整体匹配的字符串，可以一次输入多个组号，对应组号匹配的字符串。
+
+a. group（）返回re整体匹配的字符串，
+b. group (n,m) 返回组号为n，m所匹配的字符串，如果组号不存在，则返回indexError异常
+c.groups（）groups() 方法返回一个包含正则表达式中所有小组字符串的元组，从 1 到所含的小组号，通常groups()不需要参数，返回一个元组，元组中的元就是正则表达式中定义的组。 
+
+```python
+import re
+a = "123abc456"
+ print(re.search("([0-9]*)([a-z]*)([0-9]*)",a).group(0))   #123abc456,返回整体
+ print(re.search("([0-9]*)([a-z]*)([0-9]*)",a).group(1))   #123
+ print(re.search("([0-9]*)([a-z]*)([0-9]*)",a).group(2))   #abc
+ print(re.search("([0-9]*)([a-z]*)([0-9]*)",a).group(3))   #456
+###group(1) 列出第一个括号匹配部分，group(2) 列出第二个括号匹配部分，group(3) 列出第三个括号匹配部分。###
+```
+
+  
+
+#### **4、findall()**
+
+re.findall遍历匹配，可以获取字符串中所有匹配的字符串，**返回一个列表。**
+
+ 格式：
+
+re.findall(pattern, string, flags=0)
+
+```python
+p = re.compile(r'\d+')
+print(p.findall('o1n2m3k4'))
+执行结果如下：
+['1', '2', '3', '4']
+```
+
+
+
+```python
+import re
+tt = "Tina is a good girl, she is cool, clever, and so on..."
+rr = re.compile(r'\w*oo\w*')
+print(rr.findall(tt))
+print(re.findall(r'(\w)*oo(\w)',tt))#()表示子表达式 
+执行结果如下：
+['good', 'cool']
+[('g', 'd'), ('c', 'l')]
+```
+
+
+
+#### **5、split()**
+
+按照能够匹配的子串将string分割后返回列表。
+
+可以使用re.split来分割字符串，如：re.split(r'\s+', text)；将字符串按空格分割成一个单词列表。
+
+格式：
+
+re.split(pattern, string[, maxsplit])
+
+maxsplit用于指定最大分割次数，不指定将全部分割。
+
+```python
+print(re.split('\d+','one1two2three3four4five5'))
+执行结果如下：
+['one', 'two', 'three', 'four', 'five', '']
+```
+
+
+
+#### **6、sub()**
+
+使用re替换string中每一个匹配的子串后返回替换后的字符串。
+
+格式：
+
+re.sub(pattern, repl, string, count)
+
+按 Ctrl+C 复制代码
+
+按 Ctrl+C 复制代码
+
+re.sub还允许使用函数对匹配项的替换进行复杂的处理。
+
+如：re.sub(r'\s', lambda m: '[' + m.group(0) + ']', text, 0)；将字符串中的空格' '替换为'[ ]'。
+
+```python
+import re
+text = "JGood is a handsome boy, he is cool, clever, and so on..."
+print(re.sub(r'\s+', lambda m:'['+m.group(0)+']', text,0))
+执行结果如下：
+JGood[ ]is[ ]a[ ]handsome[ ]boy,[ ]he[ ]is[ ]cool,[ ]clever,[ ]and[ ]so[ ]on...
+```
+
+
+
+#### **7、subn()**
+
+ 返回替换次数
+
+格式：
+
+subn(pattern, repl, string, count=0, flags=0)
+
+```python
+print(re.subn('[1-2]','A','123456abcdef'))
+print(re.sub("g.t","have",'I get A,  I got B ,I gut C'))
+print(re.subn("g.t","have",'I get A,  I got B ,I gut C'))
+执行结果如下：
+('AA3456abcdef', 2)
+I have A,  I have B ,I have C
+('I have A,  I have B ,I have C', 3)
+```
+
+
+
+#### 8、注意点
+
+**1、re.match与re.search与re.findall的区别：**
+
+re.match只匹配字符串的开始，如果字符串开始不符合正则表达式，则匹配失败，函数返回None；而re.search匹配整个字符串，直到找到一个匹配。
+
+```python
+a=re.search('[\d]',"abc33").group()
+print(a)
+p=re.match('[\d]',"abc33")
+print(p)
+b=re.findall('[\d]',"abc33")
+print(b)
+执行结果：
+3
+None
+['3', '3']
+```
+
+**2、贪婪匹配与非贪婪匹配**
+
+*?,+?,??,{m,n}?    前面的*,+,?等都是贪婪匹配，也就是尽可能匹配，后面加?号使其变成惰性匹配
+
+
+
+```python
+a = re.findall(r"a(\d+?)",'a23b')
+print(a)
+b = re.findall(r"a(\d+)",'a23b')
+print(b)
+执行结果：
+['2']
+['23']
+```
+
+
+
+```python
+a = re.match('<(.*)>','<H1>title<H1>').group()
+print(a)
+b = re.match('<(.*?)>','<H1>title<H1>').group()
+print(b)
+执行结果：
+<H1>title<H1>
+<H1>
+```
+
+
+
+**3、用flags时遇到的小坑**
+
+```python
+print(re.split('a','1A1a2A3',re.I))#输出结果并未能区分大小写
+这是因为re.split(pattern，string，maxsplit,flags)默认是四个参数，当我们传入的三个参数的时候，系统会默认re.I是第三个参数，所以就没起作用。如果想让这里的re.I起作用，写成flags=re.I即可。 
+```
+
+
+
+#### 9、正则的小实践
+
+1、匹配电话号码
+
+```python
+p = re.compile(r'\d{3}-\d{6}')
+print(p.findall('010-628888'))
+```
+
+2、匹配IP
+
+```python
+re.search(r"(([01]?\d?\d|2[0-4]\d|25[0-5])\.){3}([01]?\d?\d|2[0-4]\d|25[0-5]\.)","192.168.1.1")
+```
+
+
+
+#### 10、str.format() 的基本使用如下:
+
+```python
+>>> print('{}网址： "{}!"'.format('菜鸟教程', 'www.runoob.com'))
+菜鸟教程网址： "www.runoob.com!"
+```
+
+括号及其里面的字符 (称作格式化字段) 将会被 format() 中的参数替换。
+
+在括号中的数字用于指向传入对象在 format() 中的位置，如下所示：
+
+```python
+>>> print('{0} 和 {1}'.format('Google', 'Runoob'))
+Google 和 Runoob
+>>> print('{1} 和 {0}'.format('Google', 'Runoob'))
+Runoob 和 Google
+```
+
+如果在 format() 中使用了关键字参数, 那么它们的值会指向使用该名字的参数。
+
+```python
+>>> print('{name}网址： {site}'.format(name='菜鸟教程', site='www.runoob.com'))
+菜鸟教程网址： www.runoob.com
+```
+
+位置及关键字参数可以任意的结合:
+
+```python
+>>> print('站点列表 {0}, {1}, 和 {other}。'.format('Google', 'Runoob',
+                                                       other='Taobao'))
+站点列表 Google, Runoob, 和 Taobao。
+```
+
+'!a' (使用 ascii()), '!s' (使用 str()) 和 '!r' (使用 repr()) 可以用于在格式化某个值之前对其进行转化:
+
+
+
+```python
+>>> import math
+>>> print('常量 PI 的值近似为： {}。'.format(math.pi))
+常量 PI 的值近似为： 3.141592653589793。
+>>> print('常量 PI 的值近似为： {!r}。'.format(math.pi))
+常量 PI 的值近似为： 3.141592653589793。
+```
+
+
+
+
+
+| r    | 以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。 |
+| ---- | ------------------------------------------------------------ |
+| rb   | 以二进制格式打开一个文件用于只读。文件指针将会放在文件的开头。 |
+| r+   | 打开一个文件用于读写。文件指针将会放在文件的开头。           |
+| rb+  | 以二进制格式打开一个文件用于读写。文件指针将会放在文件的开头。 |
+| w    | 打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。 |
+| wb   | 以二进制格式打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。 |
+| w+   | 打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。 |
+| wb+  | 以二进制格式打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。 |
+| a    | 打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。 |
+| ab   | 以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。 |
+| a+   | 打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。 |
+| ab+  | 以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。如果该文件不存在，创建新文件用于读写。 |
+
+[![img](https://camo.githubusercontent.com/c7563c879f6f85107c9efce0b2ed0cccccea2f22/687474703a2f2f7777772e72756e6f6f622e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031332f31312f323131323230352d383631633035623262646263396332382e706e67)](https://camo.githubusercontent.com/c7563c879f6f85107c9efce0b2ed0cccccea2f22/687474703a2f2f7777772e72756e6f6f622e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031332f31312f323131323230352d383631633035623262646263396332382e706e67)
+
+| 模式       | r    | r+   | w    | w+   | a    | a+   |
+| ---------- | ---- | ---- | ---- | ---- | ---- | ---- |
+| 读         | +    | +    |      | +    |      | +    |
+| 写         |      | +    | +    | +    | +    | +    |
+| 创建       |      |      | +    | +    | +    | +    |
+| 覆盖       |      |      | +    | +    |      |      |
+| 指针在开始 | +    | +    | +    | +    |      |      |
+| 指针在结尾 |      |      |      |      | +    | +    |
+
+#### 11、pickle 模块
+
+python的pickle模块实现了基本的数据序列和反序列化。
+
+通过pickle模块的序列化操作我们能够将程序中运行的对象信息保存到文件中去，永久存储。
+
+通过pickle模块的反序列化操作，我们能够从文件中创建上一次程序保存的对象。
+
+基本接口：
+
+```
+pickle.dump(obj, file, [,protocol])
+```
+
+有了 pickle 这个对象, 就能对 file 以读取的形式打开:
+
+```
+x = pickle.load(file)
+```
+
+**注解：**从 file 中读取一个字符串，并将它重构为原来的python对象。
+
+**file:** 类文件对象，有read()和readline()接口。
+
+实例1：
+
+```
+#!/usr/bin/python3
+import pickle
+
+# 使用pickle模块将数据对象保存到文件
+data1 = {'a': [1, 2.0, 3, 4+6j],
+         'b': ('string', u'Unicode string'),
+         'c': None}
+
+selfref_list = [1, 2, 3]
+selfref_list.append(selfref_list)
+
+output = open('data.pkl', 'wb')
+
+# Pickle dictionary using protocol 0.
+pickle.dump(data1, output)
+
+# Pickle the list using the highest protocol available.
+pickle.dump(selfref_list, output, -1)
+
+output.close()
+```
+
+实例2：
+
+```
+#!/usr/bin/python3
+import pprint, pickle
+
+#使用pickle模块从文件中重构python对象
+pkl_file = open('data.pkl', 'rb')
+
+data1 = pickle.load(pkl_file)
+pprint.pprint(data1)
+
+data2 = pickle.load(pkl_file)
+pprint.pprint(data2)
+
+pkl_file.close()
 ```
 
