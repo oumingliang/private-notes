@@ -488,7 +488,15 @@ pkl_file.close()
 
 
 
-### 5. 程序打包
+### 5.类
+
+
+
+
+
+
+
+### 6. 程序打包
 
 安装 setuptools 模块，使用pip install
 
@@ -514,7 +522,7 @@ py_modules=['hello'])
 
 
 
-### 6.  新闻汇总项目
+### 7.  新闻汇总项目
 
 NNTP协议
 
@@ -539,7 +547,7 @@ NNTP对象的方法(server)
 
 
 
-## 7. TensorFlow
+## 8. 机器学习与深度学习
 
 机器学习
 
@@ -548,3 +556,19 @@ NNTP对象的方法(server)
 https://baijiahao.baidu.com/s?id=1606694239390920783&wfr=spider&for=pc
 
 https://laboo.top/2018/11/21/tfjs-dr/
+
+* 无监督学习
+  * 聚类
+* 有监督学习
+
+回归
+
+分类
+
+机器学习： 管理员提取事物的特征=>训练模型
+
+
+
+## 9. 数据挖掘（爬虫）
+
+爬虫集锦：https://github.com/facert/awesome-spider
